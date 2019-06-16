@@ -56,7 +56,7 @@ FILE: ut_sample.dll
          printf 'strcmp(str, "Hello World\n")==0' is OK
          return value 'ret==0' is OK
     test001 is ok
-ut_test.dll 1/1
+ut_sample.dll 1/1
 total 3/4
 ```
 
@@ -64,9 +64,8 @@ total 3/4
 
 ```
 $ make test_report
-./0test_cygwin.exe ut_test.dll ut_sample.dll 2> /dev/null
 ut_test.dll 2/3
-ut_test.dll 1/1
+ut_sample.dll 1/1
 total 3/4
 ```
 
