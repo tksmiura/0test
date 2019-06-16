@@ -27,16 +27,16 @@ int main(int argc, char *argv[])
 
     for (i = 1; i < argc; i++) {
 
+        fprintf(stderr, "FILE: %s\n", argv[i]);
         handle = dlopen (argv[i], RTLD_LAZY);
         if (handle == NULL) {
             perror("dlopen error");
             continue;
         }
-        fprintf(stderr, "FILE: %s\n", argv[i]);
         set_jump = dlsym(handle, "SetJump");
         count_ok = 0;
         count = 0;
-        for (j = 0; j < 300; j++) {
+        for (j = 0; j < 300; j++) {                     /* MAX NUM TEST */
             sprintf(func_name, "test%03d", j);
             t = (Test) dlsym(handle, func_name);
             if (t != NULL)  {
@@ -54,10 +54,11 @@ int main(int argc, char *argv[])
                     fprintf(stderr, "    %s is not ok\n", func_name);
             }
         }
-        printf("%s %u/%u \n", argv[1], count_ok, count);
+        printf("%s %u/%u \n", argv[i], count_ok, count);
         total_ok += count_ok;
         total += count;
     }
     printf("TOTAL %u/%u", total_ok, total);
+
     return 0;
 }

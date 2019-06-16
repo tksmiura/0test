@@ -31,7 +31,7 @@ test: $(TESTS) 0test_cygwin.exe
 	./0test_cygwin.exe $(TESTS)
 
 test_report: $(TESTS) 0test_cygwin.exe
-	./0test_cygwin.exe $(TESTS) 2> /dev/null
+	@./0test_cygwin.exe $(TESTS) 2> /dev/null
 
 #
 # gcov
