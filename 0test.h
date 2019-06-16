@@ -15,10 +15,10 @@
 #define TEST_ASSERT(s, f) \
     { \
     if (f) {                                                            \
-        fprintf(stderr, s " '%s' is OK\n",#f);                          \
+        fprintf(stderr, "         %s '%s' is OK\n", s, #f);             \
     } else {                                                            \
-        fprintf(stderr, "%s:%u: '%s' is FAILURE in %s\n",               \
-               __FILE__,__LINE__,#f,__func__);                          \
+        fprintf(stderr, "         %s:%u: '%s' is NOT OK in %s\n",       \
+               __FILE__, __LINE__, #f, __func__);                       \
         longjmp(FailJump, 1);                                           \
     }}
 
