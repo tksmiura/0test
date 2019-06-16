@@ -4,7 +4,7 @@ Minimal test framework for c
 ## files
 
 | file           | desc                         |
- ----|----
+ ----------------|------------------------------
 | LICENSE        |                              |
 | README.md	 |				|
 | 0test.h	 | main test framework		|
@@ -15,6 +15,25 @@ Minimal test framework for c
 | ut_test.c	 | test this framework		|
 
 ## Usage
+
+1. Create test source named ut*.c
+2. add ut*.c include 0test.h
+```
+#include "0test.h"
+```
+3. add test code in ut*.c
+```
+bool test001(void)     /* use number 000-300 */
+{
+	return true;   /* true is ok, false is not ok */
+}
+```
+4. use TEST_ASSERT check something
+```
+    TEST_ASSERT("desc", <expr>);   /* if <expr> is false, detect not ok */
+```
+5. make test or make test_report
+
 
 ## Example test
 

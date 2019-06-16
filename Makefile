@@ -2,6 +2,7 @@
 #
 # unit test for cygwin
 #
+SRCS = sample.c
 HEADERS = 0test.h
 TEST_SRCS = $(wildcard ut_*.c)
 TESTS = $(TEST_SRCS:.c=.dll)
