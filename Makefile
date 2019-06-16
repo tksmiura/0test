@@ -21,6 +21,9 @@ $(foreach VAR,$(TESTS),$(eval $(call MAKETARGETS,$(VAR))))
 0test_cygwin.exe : 0test_cygwin.c 0test.h
 	$(CC) -g -o 0test_cygwin.exe 0test_cygwin.c
 
+0test_cygwin_gcov.exe : 0test_cygwin.c 0test.h
+	$(CC) --coverage -g -o 0test_cygwin_gcov.exe 0test_cygwin.c
+
 .PHONY: test test_report clean
 
 # run tests
@@ -43,10 +46,11 @@ $(foreach VAR,$(TEST_SRCS),$(eval $(call MAKETARGETS_GCOV,$(VAR))))
 
 # run unit tests and gcov
 .PHONY: gcov
-gcov: $(GCOV_TESTS) 0test_cygwin.exe
-	./0test_cygwin.exe $(GCOV_TESTS)
+gcov: $(GCOV_TESTS) 0test_cygwin_gcov.exe
+	./0test_cygwin_gcov.exe $(GCOV_TESTS)
 	$(GCOV) -b $(TEST_SRCS:.c=.gcda)
 
 # clean
 clean:
-	$(RM) ut*.dll 0test_cygwin.exe
+	$(RM) ut*.dll 0test_cygwin.exe 0test_cygwin_gcov.exe
+	$(RM) *.gcno *.gcda *.gcov
