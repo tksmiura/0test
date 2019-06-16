@@ -32,7 +32,7 @@ bool test001(void)     /* use number 000-300 */
 ```
     TEST_ASSERT("desc", <expr>);   /* if <expr> is false, detect not ok */
 ```
-5. make test or make test_report
+5. run "make test", "make test_report", "make gcov"
 
 
 ## Example test
@@ -68,4 +68,10 @@ $ make test_report
 ut_test.dll 2/3
 ut_test.dll 1/1
 total 3/4
+```
+
+### make gcov
+
+```
+$ make gcov
 ```
