@@ -20,7 +20,7 @@ $(foreach VAR,$(TESTS),$(eval $(call MAKETARGETS,$(VAR))))
 .PHONY: test test_report clean
 
 # run tests
-test: $(TESTS) 0test_cygwin.EXE
+test: $(TESTS) 0test_cygwin.exe
 	./0test_cygwin.exe $(TESTS)
 
 test_report: $(TESTS) 0test_cygwin.exe
