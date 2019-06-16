@@ -58,6 +58,6 @@ int main(int argc, char *argv[])
         total_ok += count_ok;
         total += count;
     }
-    printf("total %u/%u", total_ok, total);
+    printf("TOTAL %u/%u", total_ok, total);
     return 0;
 }
