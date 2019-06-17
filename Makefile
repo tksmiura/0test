@@ -1,37 +1,36 @@
 #
-# unit test for cygwin
+# unit test
 #
 SRCS = sample.c
 HEADERS = 0test.h
 TEST_SRCS = $(wildcard ut_*.c)
-TESTS = $(TEST_SRCS:.c=.dll)
-GCOV_TESTS = $(TEST_SRCS:.c=_gcov.dll)
+TESTS = $(basename $(TEST_SRCS))
+GCOV_TESTS = $(TEST_SRCS:.c=_gcov)
 
 # environment
 GCOV ?= gcov
 
 # build targets for test
 define MAKETARGETS
-$(1): $(1:.dll=.c) $(HEADERS) $(SRCS)
-	$(CC) -shared -g -o $(1) $(1:.dll=.c)
+$(1): $(1).c $(HEADERS) $(SRCS)
+	$(CC) -g -o $(1) $(1).c
 endef
 $(foreach VAR,$(TESTS),$(eval $(call MAKETARGETS,$(VAR))))
-
-# test runner cygwin
-0test_cygwin.exe : 0test_cygwin.c 0test.h
-	$(CC) -g -o 0test_cygwin.exe 0test_cygwin.c
-
-0test_cygwin_gcov.exe : 0test_cygwin.c 0test.h
-	$(CC) --coverage -g -o 0test_cygwin_gcov.exe 0test_cygwin.c
 
 .PHONY: test test_report clean
 
 # run tests
-test: $(TESTS) 0test_cygwin.exe
-	./0test_cygwin.exe $(TESTS)
+.PHONY: test
+test: $(TESTS)
+	@for test in $(TESTS) ; do \
+		echo "test $$test";\
+		./$$test ;\
+	done
 
-test_report: $(TESTS) 0test_cygwin.exe
-	@./0test_cygwin.exe $(TESTS) 2> /dev/null
+test_report: $(TESTS)
+	@for test in $(TESTS) ; do \
+		./$$test 2> /dev/null ;\
+	done
 
 #
 # gcov
@@ -39,18 +38,21 @@ test_report: $(TESTS) 0test_cygwin.exe
 
 # target gov (unit test only)
 define MAKETARGETS_GCOV
-$(1:.c=_gcov.dll): $(1)
-	$(CC) $(CFLAGS) -shared -g -o $(1:.c=_gcov.dll) --coverage $(1)
+$(1)_gcov: $(1).c
+	$(CC) $(CFLAGS) -o $(1)_gcov --coverage $(1).c
 endef
-$(foreach VAR,$(TEST_SRCS),$(eval $(call MAKETARGETS_GCOV,$(VAR))))
+$(foreach VAR,$(TESTS),$(eval $(call MAKETARGETS_GCOV,$(VAR))))
 
 # run unit tests and gcov
 .PHONY: gcov
-gcov: $(GCOV_TESTS) 0test_cygwin_gcov.exe
-	./0test_cygwin_gcov.exe $(GCOV_TESTS)
+gcov: $(GCOV_TESTS)
+	@for test in $(GCOV_TESTS) ; do \
+		./$$test ;\
+	done
 	$(GCOV) -b $(TEST_SRCS:.c=.gcda)
 
 # clean
 clean:
-	$(RM) ut*.dll 0test_cygwin.exe 0test_cygwin_gcov.exe
+	$(RM) $(TESTS) $(GCOV_TESTS)
 	$(RM) *.gcno *.gcda *.gcov
+	$(RM) -r *.dSYM/
