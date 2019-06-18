@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
                 fprintf(stderr, "    %s is not ok\n", func_name);
         }
     }
-    printf("%s %u/%u \n", argv[0], count_ok, count);
+    printf("%s %u/%u\n", argv[0], count_ok, count);
 
     return 0;
 }

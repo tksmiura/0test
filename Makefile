@@ -30,7 +30,7 @@ test: $(TESTS)
 test_report: $(TESTS)
 	@for test in $(TESTS) ; do \
 		./$$test 2> /dev/null ;\
-	done
+	done | awk '{split($$2,t,"/");ok+=t[1];total+=t[2];print $$0} END {print "TOTAL " ok "/" total}'
 
 #
 # gcov
