@@ -3,16 +3,17 @@ Minimal test framework for c
 
 ## files
 
-| file           | desc                         |
- ----------------|------------------------------
-| LICENSE        |                              |
-| README.md	 |				|
-| 0test.h	 | main test framework		|
-| 0test_cygwin.c | main for cygwin 		|
-| Makefile	 | Sample Make file		|
-| sample.c	 | Sample Target		|
-| ut_sample.c	 | Sample test code		|
-| ut_test.c	 | test this framework		|
+| file            | desc                        |
+|-----------------|-----------------------------|
+| LICENSE         |                             |
+| README.md	  |				|
+| 0test.h	  | main test framework		|
+| 0test_cygwin.c  | main for cygwin 		|
+| Makefile	  | Sample Make file		|
+| Makefile.cygwin | Sample Make file		|
+| sample.c	  | Sample Target		|
+| ut_sample.c	  | Sample test code		|
+| ut_test.c	  | test this framework		|
 
 ## Usage
 
@@ -74,3 +75,7 @@ total 3/4
 ```
 $ make gcov
 ```
+
+## Tested os
+
+macosx, cygwin
