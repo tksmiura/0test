@@ -6,17 +6,19 @@ Minimal test framework for c
 | file            | desc                        |
 |-----------------|-----------------------------|
 | LICENSE         |                             |
-| README.md	  |				|
-| 0test.h	  | main test framework		|
-| 0test_cygwin.c  | main for cygwin 		|
-| Makefile	  | Sample Make file		|
-| Makefile.cygwin | Sample Make file		|
-| sample.c	  | Sample Target		|
-| ut_sample.c	  | Sample test code		|
-| ut_test.c	  | test this framework		|
+| README.md       |                             |
+| 0test.h         | main test framework         |
+| 0test_cygwin.c  | main for cygwin             |
+| Makefile        | Sample Make file(linux)     |
+| Makefile.cygwin | Sample Make file(cygwin)    |
+| Makefile.mac    | Sample Make file(mac)       |
+| sample.c        | Sample Target               |
+| ut_sample.c     | Sample test code            |
+| ut_test.c       | test this framework         |
 
 ## Usage
 
+1. if mac or cygwin, copy Makefile.{mac,cygwin} to Makefile
 1. Create test source named ut*.c
 2. add ut*.c include 0test.h
 ```
@@ -78,4 +80,4 @@ $ make gcov
 
 ## Tested os
 
-macosx, cygwin
+macosx, cygwin, linux

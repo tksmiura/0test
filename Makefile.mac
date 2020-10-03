@@ -13,7 +13,7 @@ GCOV ?= gcov
 # build targets for test
 define MAKETARGETS
 $(1): $(1).c $(HEADERS) $(SRCS)
-	$(CC) -rdynamic -g -o $(1) $(1).c -ldl
+	$(CC) -g -o $(1) $(1).c
 endef
 $(foreach VAR,$(TESTS),$(eval $(call MAKETARGETS,$(VAR))))
 
@@ -39,7 +39,7 @@ test_report: $(TESTS)
 # target gov (unit test only)
 define MAKETARGETS_GCOV
 $(1)_gcov: $(1).c
-	$(CC) $(CFLAGS) -rdynamic -o $(1)_gcov --coverage $(1).c -ldl
+	$(CC) $(CFLAGS) -o $(1)_gcov --coverage $(1).c
 endef
 $(foreach VAR,$(TESTS),$(eval $(call MAKETARGETS_GCOV,$(VAR))))
 
