@@ -44,14 +44,17 @@ endef
 $(foreach VAR,$(TESTS),$(eval $(call MAKETARGETS_GCOV,$(VAR))))
 
 # run unit tests and gcov
-.PHONY: gcov
+.PHONY: gcov lcov
 gcov: $(GCOV_TESTS)
 	@for test in $(GCOV_TESTS) ; do \
 		./$$test ;\
 	done
 	$(GCOV) -b $(TEST_SRCS:.c=.gcda)
+	./lcov.pl > unit_test.info
+	genhtml unit_test.info -o ./coverage --branch-coverage
 
 # clean
 clean:
 	$(RM) $(TESTS) $(GCOV_TESTS)
-	$(RM) *.gcno *.gcda *.gcov
+	$(RM) *.gcno *.gcda *.gcov unit_test.info
+	$(RM) -r ./coverage
