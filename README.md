@@ -74,6 +74,8 @@ total 3/4
 
 ### make gcov
 
+need gcov and lcov
+
 ```
 $ make gcov
 ```
