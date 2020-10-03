@@ -55,4 +55,3 @@ gcov: $(GCOV_TESTS)
 clean:
 	$(RM) $(TESTS) $(GCOV_TESTS)
 	$(RM) *.gcno *.gcda *.gcov
-	$(RM) -r *.dSYM/
