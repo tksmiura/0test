@@ -49,8 +49,14 @@ $(foreach VAR,$(TEST_SRCS),$(eval $(call MAKETARGETS_GCOV,$(VAR))))
 gcov: $(GCOV_TESTS) 0test_cygwin_gcov.exe
 	./0test_cygwin_gcov.exe $(GCOV_TESTS)
 	$(GCOV) -b $(TEST_SRCS:.c=.gcda)
+	./lcov.pl > unit_test.info
+#       # workaround :lcov -r remove branch coverage
+#	lcov -c -d . --rc lcov_branch_coverage=1 -o unit_test_raw.info
+#	lcov -r unit_test_raw.info */0test.h */ut_*.c */0test_cygwin.c -o unit_test.info
+	genhtml unit_test.info -o ./coverage --branch-coverage\
 
 # clean
 clean:
 	$(RM) ut*.dll 0test_cygwin.exe 0test_cygwin_gcov.exe
-	$(RM) *.gcno *.gcda *.gcov
+	$(RM) *.gcno *.gcda *.gcov *.info
+	$(RM) -r ./coverage

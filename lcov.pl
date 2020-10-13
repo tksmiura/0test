@@ -6,6 +6,7 @@ $out = 1;
 while ($line = <FILE>) {
     #SF:/home/miura/dev/0test/0test.h
     if ($line =~ /^SF:.*\/0test\.h/ ||
+        $line =~ /^SF:.*\/0test_cygwin\.c/ ||
         $line =~ /^SF:.*\/ut_.*\.c/) {
         $out = 0;
     }
